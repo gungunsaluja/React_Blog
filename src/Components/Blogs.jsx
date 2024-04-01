@@ -8,7 +8,7 @@ const Blogs = () => {
     console.log("printing inside loop")
 
   return (
-    <div className='w-11/12 max-w-[450px] py-3 flex flex-col gap-y-7'>{
+    <div className='w-11/12 h-[full] max-w-[650px] py-8 flex flex-col gap-y-7 mt-[66px] mb-[70px] flex justify-center items-center'>{
         loading?(<Spinner/>):(posts.length===0?(<div>
             <p>No Post Found</p>
             </div>):(posts.map((post)=>(<div key = {post.id}>
@@ -16,11 +16,11 @@ const Blogs = () => {
                 <p className = 'text-[10px]'>
                     By<span className='italic'>{post.author}</span>on<span className='underline font-bold'>{post.category}</span>
                 </p>
-                <p className = 'text-[10px]'>Posted on{post.date}</p>
+                <p className = 'text-sm mt-[4px]'>Posted on{post.date}</p>
                 <p className='text-[10px] mt-[10px]'>{post.content}</p>
                 <div>
                     {post.tags.map((tag,index)=>{
-                        return <span key = {index}>{`#${tag}`}</span>
+                        return <span key = {index} className = 'text-blue-500 underline font-bold text-xs mt-[4px] '>{`#${tag}`}</span>
                     })}
                 </div>
                 </div>))
