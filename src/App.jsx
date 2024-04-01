@@ -1,9 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+import Header from "./Components/Header"
+import Blogs from "./Components/Blogs"
+
+import Pagination from "./Components/Pagination"
+import { useContext, useEffect } from "react"
+import { AppContext } from "./Context/AppContext"
+
+
 
 function App() {
+  const {fetchBlogPosts} = useContext(AppContext);
+  useEffect(()=>{
+    fetchBlogPosts();
+  },[]);
  
 
   return (

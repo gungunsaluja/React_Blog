@@ -1,16 +1,18 @@
 import { createContext, useState } from "react";
 import {baseUrl} from "../baseUrl"
 export const AppContext = createContext();
-function AppContextProvider({children}){
-    const [loading,setLoading] = useState(false);
-    const [posts,setPosts] = useState([]);
-    const [page,setPage] = useState(1);
-    const [totalPages,setTotalPages] = useState(null);
+export default  function AppContextProvider({children}){
+    const [loading, setLoading] = useState(false);
+    const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(null);
 // data filling pending
         async function fetchBlogPosts(page = 1)
         {
             setLoading(true);
             let url = `${baseUrl}?page=${page}`;
+            console.log("printin the final url");
+            console.log(url);
             try{
                     const result = await fetch(url);
                     const data = await result.json();
@@ -29,6 +31,12 @@ function AppContextProvider({children}){
 
 
             }
+            setLoading(false);
+        }
+        // to toggle between previous page and next page
+        function handlePageChange(page){
+                setPage(page);
+                fetchBlogPosts(page);
         }
     const value = {
         posts,
@@ -38,11 +46,13 @@ function AppContextProvider({children}){
         page,
         setPage,
         totalPages,
-        setTotalPages
+        setTotalPages,
+        fetchBlogPosts,
+        handlePageChange
     };
 
     // step 2
-    return <AppContextProvider value = {value}>     
+    return <AppContext.Provider value = {value}>     
      {children}       
-     </AppContextProvider>
+     </AppContext.Provider>
 }
