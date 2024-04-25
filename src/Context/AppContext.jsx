@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import {baseUrl} from "../baseUrl"
 export const AppContext = createContext();
-export default  function AppContextProvider({children}){
+export default function AppContextProvider({children}){
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
@@ -9,6 +9,7 @@ export default  function AppContextProvider({children}){
 // data filling pending
         async function fetchBlogPosts(page = 1,tag = null,category)
         {
+            // provider likh re haiii
             setLoading(true);
             let url = `${baseUrl}?page=${page}`;
             if(tag )
@@ -58,8 +59,10 @@ export default  function AppContextProvider({children}){
         handlePageChange
     };
 
-    // step 2
+    // step 2 context providing 
     return <AppContext.Provider value = {value}>     
-     {children}       
+     {children}      
+      {/*children app vaala component hai!! or usko hum value pass kar re hai  */}
      </AppContext.Provider>
 }
+// app ke andar ke sare component access karpayenge us data ko jo hum yha daal re hai!!!
