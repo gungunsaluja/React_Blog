@@ -11,18 +11,30 @@ import { AppContext } from "./Context/AppContext"
 function App() {
   const {fetchBlogPosts} = useContext(AppContext);
   useEffect(()=>{
-    fetchBlogPosts();
+    // fetch the initial BlogPosts data
+    // fetchBlogPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+      
+
+
   },[]);
  
 
   return (
-    <div className="w-full h-full flex flex-col gap-y-1 justify-center items-center">
-      <Header/>
-      <Blogs/>
-      <Pagination/>
-
+    // <div className="w-full h-full flex flex-col gap-y-1 justify-center items-center">
+    //   <Header/>
+    //   <Blogs/>
+    //   <Pagination/>
+ 
       
-    </div>
+    // </div>
+    <Routes>
+      <Route path="/" element = {<Home/>}></Route>
+      <Route path="/blog/:blogId" element = {<BlogPage/>}></Route>
+      <Route path="/tags/:tag" element = {<TagPage/>}></Route>
+      <Route path="/categories/:category" element = {<CategoryPage/>}></Route>
+    </Routes>
+
   )
 }
 
